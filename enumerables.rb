@@ -37,13 +37,11 @@ module Enumerable
   def my_any?
     h_array = to_a
     h_array.my_each do |v|
-      return true unless yield(v)
+      return true unless yield(v) == false
     end
     false
   end
 end
-
-
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
@@ -56,7 +54,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [2, 50, 6, 14, 8, 18, 133, 20, 40, 66, 10]
+c = [21, 501, 61, 141, 81, 11, 131, 1, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
