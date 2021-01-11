@@ -33,7 +33,17 @@ module Enumerable
     end
     true
   end
+
+  def my_any?
+    h_array = to_a
+    h_array.my_each do |v|
+      return false unless yield(v)
+    end
+    true
+  end
 end
+
+
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
