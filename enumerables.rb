@@ -37,9 +37,15 @@ module Enumerable
   def my_any?
     h_array = to_a
     h_array.my_each do |v|
+<<<<<<< HEAD
       return false unless yield(v)
     end
     true
+=======
+      return true unless yield(v)
+    end
+    false
+>>>>>>> e02a539b6e7ca678b01ef0f94e4571313e0d0630
   end
 end
 
@@ -56,8 +62,11 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [2, 50, 6, 14, 8, 18, 132, 20, 40, 66, 10]
+c = [2, 50, 6, 14, 8, 18, 133, 20, 40, 66, 10]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
-puts 'my_all' + '--------------------------------'
-puts "select method : #{c.my_all?(&:even?)}\n\n"
+# puts 'my_all' + '--------------------------------'
+# puts "select method : #{c.my_all?(&:even?)}\n\n"
+
+puts 'my_any?' + '--------------------------------'
+puts "select method : #{c.my_any?(&:even?)}\n\n"
