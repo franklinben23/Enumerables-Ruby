@@ -59,8 +59,8 @@ end
 c = [2, 50, 6, 14, 8, 18, 133, 20, 40, 66, 10]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
-# puts 'my_all' + '--------------------------------'
-# puts "select method : #{c.my_all?(&:even?)}\n\n"
+puts 'my_all' + '--------------------------------'
+puts "select method : #{c.my_all?(&:even?)}\n\n"
 
 puts 'my_any?' + '--------------------------------'
 puts "select method : #{c.my_any?(&:even?)}\n\n"
