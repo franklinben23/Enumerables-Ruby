@@ -37,15 +37,9 @@ module Enumerable
   def my_any?
     h_array = to_a
     h_array.my_each do |v|
-<<<<<<< HEAD
-      return false unless yield(v)
-    end
-    true
-=======
       return true unless yield(v)
     end
     false
->>>>>>> e02a539b6e7ca678b01ef0f94e4571313e0d0630
   end
 end
 
