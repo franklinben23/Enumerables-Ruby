@@ -14,18 +14,17 @@ module Enumerable
   end
 
   def my_select
-    #iterate trough every instance of the array, check for the ones that make the condition true and return them into a new array.
     h_array = to_a
     new_arr = []
-    var_1 = 0
+    var = 0
     h_array.my_each do |v|
       if yield v
-        new_arr[var_1] = v
-        var_1 = var_1 + 1 
+        new_arr[var] = v
+        var += 1
       end
     end
+    new_arr
   end
-  new_arr
 end
 
 # puts 'my_each for hash' + '----------------------------------'
@@ -40,4 +39,4 @@ end
 
 puts 'my_select' + '--------------------------------'
 c = [2, 50, 3, 7, 8, 9, 132, 20, 40, 33, 5]
-puts "select method : #{c.my_select {|num| num.even? }}\n\n"
+puts "select method : #{c.my_select { |num| num != 2 }}\n\n"
