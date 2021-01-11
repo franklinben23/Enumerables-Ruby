@@ -16,7 +16,7 @@ module Enumerable
     h_array = to_a
     unless block_given? 
       0.upto(length - 1) do |v|
-      puts h_array[v], v
+      h_array[v], v
       end
 
     else 0.upto(length - 1) do |v|
