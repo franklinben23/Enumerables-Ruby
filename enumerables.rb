@@ -72,19 +72,14 @@ module Enumerable
     count
   end
 
-  def my_map1(num = '')
-    h_array = []
-    h_hash = {}
-    p_hash = Hash.new {|h, k| h[k] = ''}
-    self.my_each do |v|
-      h_array.push(yield(v))
+  def my_map
+    h_array = to_a
+    map_arr = []
+    return h_array unless block_given?
+    h_array.my_each do |v|
+      map_arr.push(yield(v))
     end
-    return h_array unless self.instance_of?(Hash) == true
-
-    self.my_each do |v|
-      h_hash.store(yield(v))
-    end
-    h_hash
+    map_arr
   end
 end
 
@@ -102,7 +97,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+# c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
@@ -123,8 +118,22 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # ary.count(2)               #=> 2
 # ary.count { |x| x%2 == 0 } #=> 3
 
+<<<<<<< HEAD
 
  puts 'my_map' + '--------------------------------'
  puts "map array : #{c.map { |x| x*2 }}\n\n"
  hash = { fish: 'shark', bird: 'rooster' }
  puts "map hash : #{h.my_map { |x| x*2 }}\n\n"
+=======
+# puts 'my_map' + '--------------------------------'
+# puts "select method : #{c.my_map { |num| num * 10 }}\n\n"
+
+# puts 'my_map for hash' + '--------------------------------'
+# puts "select method : #{c.map {|x| x.odd? }}\n\n"
+
+# hash_map = { fish: 'shark', bird: 'rooster' }.my_map {|v| }
+# print hash_map
+
+hash = { key1: 'value1', key2: 'value2' }.my_map
+print hash
+>>>>>>> 590c712c2a1c2aaf12cb9ccdf6e3cbac1078b1a5
