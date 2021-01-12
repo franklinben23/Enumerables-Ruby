@@ -50,18 +50,6 @@ module Enumerable
     true
   end
 
-<<<<<<< HEAD
-  def my_count? (arg)
-    h_array = to_a
-    count = 0
-    h_array.my_each do |v|
-      puts yield(v)
-      count += 1 
-      # end
-    end
-    count
-    # print h_array[v]
-=======
   def my_count(num = '')
     h_array = to_a
     count = 0
@@ -82,7 +70,16 @@ module Enumerable
       count += 1 unless yield(v) == false
     end
     count
->>>>>>> 87022ca8bac6945a3b8a2283822a1955e30be075
+  end
+
+  def my_map
+    h_array = to_a
+    map_arr = []
+    return h_array unless block_given?
+    h_array.my_each do |v|
+      map_arr.push(yield(v))
+    end
+    map_arr
   end
 end
 
@@ -97,11 +94,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-<<<<<<< HEAD
-c = [21, 501, 61, 141, 81, 11, 133, 1, 41, 61, 11, 13,]
-=======
-c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
->>>>>>> 87022ca8bac6945a3b8a2283822a1955e30be075
+# c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
@@ -113,11 +106,23 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts 'my_none?' + '--------------------------------'
 # puts "select method : #{c.my_none?(&:even?)}\n\n"
 
-puts 'my_count' + '--------------------------------'
-puts "count a : #{c.my_count}\n\n"
-puts "count b : #{c.my_count(11)}\n\n"
-puts "count c : #{c.my_count { |x| (x % 2).zero? }}\n\n"
+# puts 'my_count' + '--------------------------------'
+# puts "count a : #{c.my_count}\n\n"
+# puts "count b : #{c.my_count(11)}\n\n"
+# puts "count c : #{c.my_count { |x| (x % 2).zero? }}\n\n"
 # ary = [1, 2, 4, 2]
 # ary.count                  #=> 4
 # ary.count(2)               #=> 2
 # ary.count { |x| x%2 == 0 } #=> 3
+
+# puts 'my_map' + '--------------------------------'
+# puts "select method : #{c.my_map { |num| num * 10 }}\n\n"
+
+# puts 'my_map for hash' + '--------------------------------'
+# puts "select method : #{c.map {|x| x.odd? }}\n\n"
+
+# hash_map = { fish: 'shark', bird: 'rooster' }.my_map {|v| }
+# print hash_map
+
+hash = { key1: 'value1', key2: 'value2' }.my_map
+print hash
