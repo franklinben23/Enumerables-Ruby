@@ -49,6 +49,18 @@ module Enumerable
     end
     true
   end
+
+  def my_count? (arg)
+    h_array = to_a
+    count = 0
+    h_array.my_each do |v|
+      puts yield(v)
+      count += 1 
+      # end
+    end
+    count
+    # print h_array[v]
+  end
 end
 
 # puts 'my_each for hash' + '----------------------------------'
@@ -62,7 +74,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [21, 501, 61, 141, 81, 11, 133, 1, 41, 61, 11]
+c = [21, 501, 61, 141, 81, 11, 133, 1, 41, 61, 11, 13,]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
@@ -71,5 +83,8 @@ c = [21, 501, 61, 141, 81, 11, 133, 1, 41, 61, 11]
 # puts 'my_any?' + '--------------------------------'
 # puts "select method : #{c.my_any?(&:even?)}\n\n"
 
-puts 'my_none?' + '--------------------------------'
-puts "select method : #{c.my_none?(&:even?)}\n\n"
+# puts 'my_none?' + '--------------------------------'
+# puts "select method : #{c.my_none?(&:even?)}\n\n"
+
+puts 'my_count?' + '--------------------------------'
+puts "select method : #{c.my_count?(1)}\n\n"
