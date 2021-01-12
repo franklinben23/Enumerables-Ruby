@@ -113,10 +113,6 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts 'my_none?' + '--------------------------------'
 # puts "select method : #{c.my_none?(&:even?)}\n\n"
 
-<<<<<<< HEAD
-puts 'my_count?' + '--------------------------------'
-puts "select method : #{c.my_count?(1)}\n\n"
-=======
 puts 'my_count' + '--------------------------------'
 puts "count a : #{c.my_count}\n\n"
 puts "count b : #{c.my_count(11)}\n\n"
@@ -125,4 +121,3 @@ puts "count c : #{c.my_count { |x| (x % 2).zero? }}\n\n"
 # ary.count                  #=> 4
 # ary.count(2)               #=> 2
 # ary.count { |x| x%2 == 0 } #=> 3
->>>>>>> 87022ca8bac6945a3b8a2283822a1955e30be075
