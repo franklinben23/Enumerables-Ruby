@@ -41,6 +41,14 @@ module Enumerable
     end
     false
   end
+
+  def my_none?
+    h_array = to_a
+    h_array.my_each do |v|
+      return false unless yield(v) == false
+    end
+    true
+  end
 end
 
 # puts 'my_each for hash' + '----------------------------------'
@@ -54,11 +62,14 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [21, 501, 61, 141, 81, 11, 131, 1, 41, 61, 11]
+c = [21, 501, 61, 141, 81, 11, 133, 1, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
-puts 'my_all' + '--------------------------------'
-puts "select method : #{c.my_all?(&:even?)}\n\n"
+# puts 'my_all' + '--------------------------------'
+# puts "select method : #{c.my_all?(&:even?)}\n\n"
 
-puts 'my_any?' + '--------------------------------'
-puts "select method : #{c.my_any?(&:even?)}\n\n"
+# puts 'my_any?' + '--------------------------------'
+# puts "select method : #{c.my_any?(&:even?)}\n\n"
+
+puts 'my_none?' + '--------------------------------'
+puts "select method : #{c.my_none?(&:even?)}\n\n"
