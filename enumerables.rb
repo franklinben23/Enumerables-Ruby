@@ -71,7 +71,25 @@ module Enumerable
     end
     count
   end
+
+  def my_map1(num = '')
+    h_array = []
+    h_hash = {}
+    p_hash = Hash.new {|h, k| h[k] = ''}
+    self.my_each do |v|
+      h_array.push(yield(v))
+    end
+    return h_array unless self.instance_of?(Hash) == true
+
+    self.my_each do |v|
+      h_hash.store(yield(v))
+    end
+    h_hash
+  end
 end
+
+
+
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
@@ -96,11 +114,17 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts 'my_none?' + '--------------------------------'
 # puts "select method : #{c.my_none?(&:even?)}\n\n"
 
-puts 'my_count' + '--------------------------------'
-puts "count a : #{c.my_count}\n\n"
-puts "count b : #{c.my_count(11)}\n\n"
-puts "count c : #{c.my_count { |x| (x % 2).zero? }}\n\n"
+# puts 'my_count' + '--------------------------------'
+# puts "count a : #{c.my_count}\n\n"
+# puts "count b : #{c.my_count(11)}\n\n"
+# puts "count c : #{c.my_count { |x| (x % 2).zero? }}\n\n"
 # ary = [1, 2, 4, 2]
 # ary.count                  #=> 4
 # ary.count(2)               #=> 2
 # ary.count { |x| x%2 == 0 } #=> 3
+
+
+ puts 'my_map' + '--------------------------------'
+ puts "map array : #{c.map { |x| x*2 }}\n\n"
+ hash = { fish: 'shark', bird: 'rooster' }
+ puts "map hash : #{h.my_map { |x| x*2 }}\n\n"
