@@ -81,6 +81,38 @@ module Enumerable
     end
     map_arr
   end
+
+  def my_inject(num = 0, &block)
+    h_arr = {}
+    self.my_each do |v|
+      h_arr[v[0]] = v[1]
+    #   puts "tis is v: #{v} and this is array: #{h_arr}"
+    end 
+    h_arr = article.attributes.select {|k, v| !v.nil? } unless (h_arr.instance_of?(Array)) == true
+      
+    return h_arr unless self.instance_of?(Array) == true
+
+    return h_arr unless (num == {}) == false
+
+    sum = 0
+    self.my_each do |v|
+      sum += v unless (v.instance_of?(String)) == true
+    end
+    return sum unless (num == 0) == false || block_given?
+    
+    sum = num
+    self.my_each do |v|
+      sum += v unless (v.instance_of?(String)) == true
+    end
+    return sum unless block_given?
+
+    sum = num
+    self.my_each do |v| 
+      sum = block.call(sum, v) unless (block.call(sum, v).instance_of?(String)) == true
+    end
+    return block.call(sum, v) unless (sum > 0) == true
+    sum
+  end  
 end
 
 
@@ -97,7 +129,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-# c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
@@ -118,13 +150,6 @@ end
 # ary.count(2)               #=> 2
 # ary.count { |x| x%2 == 0 } #=> 3
 
-<<<<<<< HEAD
-
- puts 'my_map' + '--------------------------------'
- puts "map array : #{c.map { |x| x*2 }}\n\n"
- hash = { fish: 'shark', bird: 'rooster' }
- puts "map hash : #{h.my_map { |x| x*2 }}\n\n"
-=======
 # puts 'my_map' + '--------------------------------'
 # puts "select method : #{c.my_map { |num| num * 10 }}\n\n"
 
@@ -134,6 +159,19 @@ end
 # hash_map = { fish: 'shark', bird: 'rooster' }.my_map {|v| }
 # print hash_map
 
-hash = { key1: 'value1', key2: 'value2' }.my_map
-print hash
->>>>>>> 590c712c2a1c2aaf12cb9ccdf6e3cbac1078b1a5
+# hash = { key1: 'value1', key2: 'value2' }.my_map
+# print hash
+d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+puts 'my_inject' + '--------------------------------'
+h = [['fish': 'shark'], ['bird': 'rooster']]
+j = ['dog', 'chicken', 'tiger']
+puts "inject a : #{c.my_inject}\n\n"
+puts "inject b : #{c.my_inject(1)}\n\n"
+# puts "inject b : #{h.my_inject(11)}\n\n"
+puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
+puts "inject d : #{d.my_inject(1) {|sum, number| sum * number }}\n\n"
+print h.my_inject({})
+print j.my_inject do |memo, word|
+memo.length > word.length ? memo : word
+end
