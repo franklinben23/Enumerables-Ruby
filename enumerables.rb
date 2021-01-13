@@ -139,11 +139,10 @@ def multiply_els(array)
 end
 answer = multiply_els([2, 4, 5])
 puts answer
-
-proc = Proc.new {|num| puts "Thank you #{num}"}
+c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+proc = proc { |num| puts "Thank you #{num}" }
 arr2 = c.my_map(&proc)
 puts arr2
-
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
