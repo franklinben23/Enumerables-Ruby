@@ -1,6 +1,12 @@
 module Enumerable
   def my_each
     h_array = to_a
+    if self.instance_of?(Range) == true
+      self.step(1) do |v|
+        yield(h_array[v])
+      end  
+   end
+    return unless self.instance_of?(Range) == false
     0.upto(length - 1) do |v|
       yield(h_array[v])
     end
@@ -83,26 +89,28 @@ module Enumerable
   end
 
   def my_inject(num = 0, &block)
-    h_arr = {}
+    sum = 0
     self.my_each do |v|
-      h_arr[v[0]] = v[1]
-    #   puts "tis is v: #{v} and this is array: #{h_arr}"
-    end 
-    h_arr = article.attributes.select {|k, v| !v.nil? } unless (h_arr.instance_of?(Array)) == true
-      
-    return h_arr unless self.instance_of?(Array) == true
+      puts "This is v:  #{v}"
+      sum += v
+    end
+    return sum unless (num == :+) == false
 
-    return h_arr unless (num == {}) == false
+    sum = 1
+    self.my_each do |v|
+      sum *= v
+    end
+    return sum unless (num == :*) == false
 
     sum = 0
     self.my_each do |v|
-      sum += v unless (v.instance_of?(String)) == true
+      sum += v
     end
     return sum unless (num == 0) == false || block_given?
     
     sum = num
     self.my_each do |v|
-      sum += v unless (v.instance_of?(String)) == true
+      sum += v
     end
     return sum unless block_given?
 
@@ -162,16 +170,18 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # hash = { key1: 'value1', key2: 'value2' }.my_map
 # print hash
 d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+e = (0..10)
+f = (1..10)
 
 puts 'my_inject' + '--------------------------------'
-h = [['fish': 'shark'], ['bird': 'rooster']]
-j = ['dog', 'chicken', 'tiger']
 puts "inject a : #{c.my_inject}\n\n"
 puts "inject b : #{c.my_inject(1)}\n\n"
 # puts "inject b : #{h.my_inject(11)}\n\n"
 puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
-puts "inject d : #{d.my_inject(1) {|sum, number| sum * number }}\n\n"
-print h.my_inject({})
-print j.my_inject do |memo, word|
-memo.length > word.length ? memo : word
-end
+puts "inject d : #{d.my_inject(2) {|sum, number| sum * number }}\n\n"
+puts "inject e : #{e.my_inject}\n\n"
+puts "inject f : #{e.my_inject}\n\n"
+puts "inject g : #{(f).my_inject(:*)}\n\n"
+
+
+
