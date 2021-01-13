@@ -134,6 +134,17 @@ module Enumerable
   end
 end
 
+def multiply_els(array)
+  array.my_inject(:*)
+end
+answer = multiply_els([2, 4, 5])
+puts answer
+
+proc = Proc.new {|num| puts "Thank you #{num}"}
+arr2 = c.my_map(&proc)
+puts arr2
+
+
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
 
@@ -145,7 +156,7 @@ end
 # { fish: 'shark', bird: 'rooster' }.my_each_with_index { |v, i| puts "this is sequence#{v} and it's index is #{i}" }
 
 # puts 'my_select' + '--------------------------------'
-c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+# c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all' + '--------------------------------'
@@ -177,20 +188,20 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 
 # hash = { key1: 'value1', key2: 'value2' }.my_map
 # print hash
-d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-e = (1..10)
-f = (1..10)
+# d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+# e = (1..10)
+# f = (1..10)
 
-puts 'my_inject' + '--------------------------------'
-puts "inject a : #{c.my_inject}\n\n"
-puts "inject b : #{c.my_inject(1)}\n\n"
-# puts "inject b : #{h.my_inject(11)}\n\n"
-puts "inject c : #{d.my_inject { |sum, number| sum + number }}\n\n"
-puts "inject c2 : #{d.my_inject(2) { |sum, number| sum + number }}\n\n"
-puts "inject d : #{d.my_inject(2) { |sum, number| sum * number }}\n\n"
-puts "inject e : #{e.my_inject}\n\n"
-puts "inject f : #{e.my_inject { |sum, number| sum * number }}\n\n"
-puts "inject g : #{f.my_inject(:*)}\n\n"
+# puts 'my_inject' + '--------------------------------'
+# puts "inject a : #{c.my_inject}\n\n"
+# puts "inject b : #{c.my_inject(1)}\n\n"
+# # puts "inject b : #{h.my_inject(11)}\n\n"
+# puts "inject c : #{d.my_inject { |sum, number| sum + number }}\n\n"
+# puts "inject c2 : #{d.my_inject(2) { |sum, number| sum + number }}\n\n"
+# puts "inject d : #{d.my_inject(2) { |sum, number| sum * number }}\n\n"
+# puts "inject e : #{e.my_inject}\n\n"
+# puts "inject f : #{e.my_inject { |sum, number| sum * number }}\n\n"
+# puts "inject g : #{f.my_inject(:*)}\n\n"
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
