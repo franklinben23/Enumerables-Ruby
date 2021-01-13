@@ -1,12 +1,16 @@
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
     h_array = to_a
-    if self.instance_of?(Range) == true
-      self.step(1) do |v|
+    if instance_of?(Range) == true
+      step(1) do |v|
         yield(h_array[v])
-      end  
-   end
-    return unless self.instance_of?(Range) == false
+      end
+    end
+    return unless instance_of?(Range) == false
+
     0.upto(length - 1) do |v|
       yield(h_array[v])
     end
@@ -82,6 +86,7 @@ module Enumerable
     h_array = to_a
     map_arr = []
     return h_array unless block_given?
+
     h_array.my_each do |v|
       map_arr.push(yield(v))
     end
@@ -90,41 +95,44 @@ module Enumerable
 
   def my_inject(num = 0, &block)
     sum = 0
-    self.my_each do |v|
-      puts "This is v:  #{v}"
+    h_range = to_a
+    h_range.my_each do |v|
       sum += v
     end
     return sum unless (num == :+) == false
 
     sum = 1
-    self.my_each do |v|
+    h_range.my_each do |v|
       sum *= v
     end
     return sum unless (num == :*) == false
 
     sum = 0
-    self.my_each do |v|
+    h_range.my_each do |v|
       sum += v
     end
-    return sum unless (num == 0) == false || block_given?
-    
+    return sum unless !num.zero? || block_given?
+
     sum = num
-    self.my_each do |v|
+    h_range.my_each do |v|
       sum += v
     end
     return sum unless block_given?
 
     sum = num
-    self.my_each do |v| 
-      sum = block.call(sum, v) unless (block.call(sum, v).instance_of?(String)) == true
+    sum = h_range[0] unless num.positive?
+    index = 0
+    h_range.my_each do
+      sum = block.call(sum, h_range[index]) unless num.positive?
+      sum = block.call(sum, h_range[index - 1]) unless num.positive? == false
+      index += 1
+      break unless (index == h_range.length) == false
     end
-    return block.call(sum, v) unless (sum > 0) == true
+    return sum unless sum.positive?
+
     sum
-  end  
+  end
 end
-
-
-
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
@@ -170,18 +178,19 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # hash = { key1: 'value1', key2: 'value2' }.my_map
 # print hash
 d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-e = (0..10)
+e = (1..10)
 f = (1..10)
 
 puts 'my_inject' + '--------------------------------'
 puts "inject a : #{c.my_inject}\n\n"
 puts "inject b : #{c.my_inject(1)}\n\n"
 # puts "inject b : #{h.my_inject(11)}\n\n"
-puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
-puts "inject d : #{d.my_inject(2) {|sum, number| sum * number }}\n\n"
+puts "inject c : #{d.my_inject { |sum, number| sum + number }}\n\n"
+puts "inject c2 : #{d.my_inject(2) { |sum, number| sum + number }}\n\n"
+puts "inject d : #{d.my_inject(2) { |sum, number| sum * number }}\n\n"
 puts "inject e : #{e.my_inject}\n\n"
-puts "inject f : #{e.my_inject}\n\n"
-puts "inject g : #{(f).my_inject(:*)}\n\n"
-
-
-
+puts "inject f : #{e.my_inject { |sum, number| sum * number }}\n\n"
+puts "inject g : #{f.my_inject(:*)}\n\n"
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
