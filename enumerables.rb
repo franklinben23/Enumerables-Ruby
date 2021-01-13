@@ -82,13 +82,17 @@ module Enumerable
     map_arr
   end
 
-  def my_inject(num = 0, &block)
+  def my_inject(num = 0, sym =nil, &block)
+    memo = memo.to_sym if memo.is_a?(String) && !sym && !block
+    sym = sym.to_sym if sym.is_a?(String)
+
+    puts sym
     h_arr = {}
     self.my_each do |v|
       h_arr[v[0]] = v[1]
     #   puts "tis is v: #{v} and this is array: #{h_arr}"
     end 
-    h_arr = article.attributes.select {|k, v| !v.nil? } unless (h_arr.instance_of?(Array)) == true
+    # h_arr = article.attributes.select {|k, v| !v.nil? } unless (h_arr.instance_of?(Array)) == true
       
     return h_arr unless self.instance_of?(Array) == true
 
@@ -161,7 +165,7 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 
 # hash = { key1: 'value1', key2: 'value2' }.my_map
 # print hash
-d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+d = [1, 1, 1, 1, 5, 1, 1, 8, 1, 1]
 
 puts 'my_inject' + '--------------------------------'
 h = [['fish': 'shark'], ['bird': 'rooster']]
@@ -171,6 +175,8 @@ puts "inject b : #{c.my_inject(1)}\n\n"
 # puts "inject b : #{h.my_inject(11)}\n\n"
 puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
 puts "inject d : #{d.my_inject(1) {|sum, number| sum * number }}\n\n"
+# # puts "inject e : #{d.my_inject(*)}\n\n"
+# puts "inject f : #{d.my_inject(:+)}\n\n"
 print h.my_inject({})
 print j.my_inject do |memo, word|
 memo.length > word.length ? memo : word
