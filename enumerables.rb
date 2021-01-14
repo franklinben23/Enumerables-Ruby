@@ -122,6 +122,7 @@ module Enumerable
   end
 
   def my_inject(num = 0, &block)
+    return 'no block given (LocalJumpError)' unless block_given? || num != 0
     sum = 0
     h_range = to_a
     h_range.my_each do |v|
@@ -169,7 +170,7 @@ end
 # puts answer
 # c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # proc = proc { |num| puts "Thank you #{num}" }
-# arr2 = c.my_map(&proc)
+# arr2 = c.map(&proc) {|num| puts "changed #{num}"}
 # puts arr2
 
 # puts 'my_each for hash' + '----------------------------------'
@@ -230,7 +231,8 @@ end
 # puts "inject d : #{d.my_inject(2) { |sum, number| sum * number }}\n\n"
 # puts "inject e : #{e.my_inject}\n\n"
 # puts "inject f : #{e.my_inject { |sum, number| sum * number }}\n\n"
-# puts "inject g : #{f.my_inject(:*)}\n\n"
+# puts "inject g : #{d.inject}\n\n"
+# puts "inject g : #{d.my_inject(11)}\n\n"
 # rubocop:enable Metrics/ModuleLength
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
