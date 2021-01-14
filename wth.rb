@@ -12,6 +12,8 @@ def my_inject(memo = nil, sym = nil, &block)
 end
 end
 
+if 
+
 # A variety of test cases    
 p (1..4).my_inject(:*)                                # 4 factorial via Symbol =>  24
 p (1..5).my_inject('*')                               # 5 factorial via String =>  120
@@ -24,3 +26,7 @@ p %w(3 4 5).my_inject("hello", &:+)                   # prefix and Proc => "hell
 p %w(3 4 5).my_inject("howdy") { |memo, x| memo + x } # prefix and block => "howdy345"
 p %w(3 4 5).my_inject("yowza", :+)                    # prefix and Symbol => "yowza345"
 p %w(3 4 5).my_inject("yoiks", '+')                   # prefix and String => "yoiks345"
+
+proc =  { |num| num * 10 }
+
+c.my_map(&proc)

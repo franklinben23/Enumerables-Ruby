@@ -169,19 +169,23 @@ c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 
 # hash = { key1: 'value1', key2: 'value2' }.my_map
 # print hash
-d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-e = (0..10)
-f = (1..10)
+# d = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+# e = (0..10)
+# f = (1..10)
 
-puts 'my_inject' + '--------------------------------'
-puts "inject a : #{c.my_inject}\n\n"
-puts "inject b : #{c.my_inject(1)}\n\n"
-# puts "inject b : #{h.my_inject(11)}\n\n"
-puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
-puts "inject d : #{d.my_inject(2) {|sum, number| sum * number }}\n\n"
-puts "inject e : #{e.my_inject}\n\n"
-puts "inject f : #{e.my_inject}\n\n"
-puts "inject g : #{(f).my_inject(:*)}\n\n"
+# puts 'my_inject' + '--------------------------------'
+# puts "inject a : #{c.my_inject}\n\n"
+# puts "inject b : #{c.my_inject(1)}\n\n"
+# # puts "inject b : #{h.my_inject(11)}\n\n"
+# puts "inject c : #{d.my_inject {|sum, number| sum + number }}\n\n"
+# puts "inject d : #{d.my_inject(2) {|sum, number| sum * number }}\n\n"
+# puts "inject e : #{e.my_inject}\n\n"
+# puts "inject f : #{e.my_inject}\n\n"
+# puts "inject g : #{(f).my_inject(:*)}\n\n"
 
+proc = Proc.new {|num| puts "Thank you #{num}"}
+
+arr2 = c.my_map(&proc)
+puts arr2
 
 
