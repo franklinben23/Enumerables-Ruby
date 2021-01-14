@@ -73,8 +73,15 @@ module Enumerable
     false
   end
 
-  def my_none?
+  def my_none?(num = nil)
     h_array = to_a
+
+    h_array.my_each do |v|
+      break unless num.nil? == false
+      return false unless (v == num) == false
+    end
+    return true unless block_given?
+
     h_array.my_each do |v|
       return false unless yield(v) == false
     end
@@ -187,7 +194,8 @@ end
 # puts "select method : #{c.my_any?(&:even?)}\n\n"
 
 # puts 'my_none?' + '--------------------------------'
-# puts "select method : #{c.my_none?(&:even?)}\n\n"
+# puts "my_none? method : #{['dog','car'].my_none?('dog')}\n\n"
+# puts "none? method : #{['dog','car'].none?('dog')}\n\n"
 
 # puts 'my_count' + '--------------------------------'
 # puts "count a : #{c.my_count}\n\n"
