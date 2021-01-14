@@ -3,20 +3,26 @@
 # rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
+    return to_enum(:my_each) unless block_given?
+    index = 0
     h_array = to_a
+
     if instance_of?(Range) == true
-      step(1) do |v|
-        yield(h_array[v])
+      step do
+        yield(h_array[index])
+        index += 1
       end
     end
-    return unless instance_of?(Range) == false
+    return self unless instance_of?(Range) == false
 
     0.upto(length - 1) do |v|
       yield(h_array[v])
     end
+    self
   end
 
   def my_each_with_index
+    return to_enum(:my_each_with_index) unless block_given?
     h_array = to_a
     0.upto(length - 1) do |v|
       yield(h_array[v], v)
@@ -24,6 +30,7 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
     h_array = to_a
     new_arr = []
     var = 0
@@ -38,6 +45,14 @@ module Enumerable
 
   def my_all?
     h_array = to_a
+
+    unless block_given?
+      h_array.my_each do |v|
+        return false unless v == true
+      end
+    end
+    return true unless block_given?
+
     h_array.my_each do |v|
       return false unless yield(v)
     end
@@ -83,9 +98,9 @@ module Enumerable
   end
 
   def my_map
+    return to_enum(:double) unless block_given?
     h_array = to_a
     map_arr = []
-    return h_array unless block_given?
 
     h_array.my_each do |v|
       map_arr.push(yield(v))
@@ -123,8 +138,8 @@ module Enumerable
     sum = h_range[0] unless num.positive?
     index = 0
     h_range.my_each do
-      sum = block.call(sum, h_range[index]) unless num.positive?
-      sum = block.call(sum, h_range[index - 1]) unless num.positive? == false
+      sum = block.yield(sum, h_range[index]) unless num.positive?
+      sum = block.yield(sum, h_range[index - 1]) unless num.positive? == false
       index += 1
       break unless (index == h_range.length) == false
     end
@@ -134,21 +149,21 @@ module Enumerable
   end
 end
 
-def multiply_els(array)
-  array.my_inject(:*)
-end
-answer = multiply_els([2, 4, 5])
-puts answer
-c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
-proc = proc { |num| puts "Thank you #{num}" }
-arr2 = c.my_map(&proc)
-puts arr2
+# def multiply_els(array)
+#   array.my_inject(:*)
+# end
+# answer = multiply_els([2, 4, 5])
+# puts answer
+# c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+# proc = proc { |num| puts "Thank you #{num}" }
+# arr2 = c.my_map(&proc)
+# puts arr2
 
 # puts 'my_each for hash' + '----------------------------------'
 # { fish: 'shark', bird: 'rooster'}.my_each { |v| puts "this is sequence#{v}" }
 
 # puts 'my_each' + '----------------------------------'
-# [2, 3, 7, 8, 9, 132].my_each { |v| puts "this is sequence#{v}" }
+# puts [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11].my_each { |v| puts "this is sequence#{v}" }.to_s
 
 # puts 'my_each_with_index for hash' + '----------------------------------'
 
@@ -158,8 +173,9 @@ puts arr2
 # c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
-# puts 'my_all' + '--------------------------------'
-# puts "select method : #{c.my_all?(&:even?)}\n\n"
+# puts 'my_all?' + '--------------------------------'
+# puts "my all? method : #{ [1, false, "hi", []].my_all? }\n\n"
+# puts "my all? method : #{ [1, false, "hi", []].all? }\n\n"
 
 # puts 'my_any?' + '--------------------------------'
 # puts "select method : #{c.my_any?(&:even?)}\n\n"
