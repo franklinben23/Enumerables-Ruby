@@ -43,8 +43,14 @@ module Enumerable
     new_arr
   end
 
-  def my_all?
+  def my_all?(num = nil)
     h_array = to_a
+
+    h_array.my_each do |v|
+      break unless num.nil? == false
+      return false unless (v == num) == true
+    end
+    return true unless block_given?
 
     unless block_given?
       h_array.my_each do |v|
@@ -174,8 +180,8 @@ end
 # puts "select method : #{c.my_select { |num| num > 10 }}\n\n"
 
 # puts 'my_all?' + '--------------------------------'
-# puts "my all? method : #{ [1, false, "hi", []].my_all? }\n\n"
-# puts "my all? method : #{ [1, false, "hi", []].all? }\n\n"
+# puts "my all? method : #{ [5,5,[5]].my_all?(5) }\n\n"
+# puts "all? method : #{ [5,5,[5]].all?(5) }\n\n"
 
 # puts 'my_any?' + '--------------------------------'
 # puts "select method : #{c.my_any?(&:even?)}\n\n"
