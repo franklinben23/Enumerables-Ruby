@@ -4,6 +4,7 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
+
     index = 0
     h_array = to_a
 
@@ -23,6 +24,7 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
+
     h_array = to_a
     0.upto(length - 1) do |v|
       yield(h_array[v], v)
@@ -31,6 +33,7 @@ module Enumerable
 
   def my_select
     return to_enum(:my_select) unless block_given?
+
     h_array = to_a
     new_arr = []
     var = 0
@@ -112,6 +115,7 @@ module Enumerable
 
   def my_map
     return to_enum(:double) unless block_given?
+
     h_array = to_a
     map_arr = []
 
@@ -123,6 +127,7 @@ module Enumerable
 
   def my_inject(num = 0, &block)
     return 'no block given (LocalJumpError)' unless block_given? || num != 0
+
     sum = 0
     h_range = to_a
     h_range.my_each do |v|
@@ -157,19 +162,19 @@ module Enumerable
       index += 1
       break unless (index == h_range.length) == false
     end
-    return sum unless sum.positive?
+    return sum unless num.positive?
 
     sum
   end
 end
 
-# def multiply_els(array)
-#   array.my_inject(:*)
-# end
-# answer = multiply_els([2, 4, 5])
-# puts answer
+def multiply_els(array)
+  array.my_inject(:*)
+end
+answer = multiply_els([2, 4, 5])
+puts answer
 # c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
-# proc = proc { |num| puts "Thank you #{num}" }
+# proc = proc { |num, number| puts "Thank you #{num + number}" }
 # arr2 = c.map(&proc) {|num| puts "changed #{num}"}
 # puts arr2
 
