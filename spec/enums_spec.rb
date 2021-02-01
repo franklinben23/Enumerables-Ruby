@@ -57,7 +57,7 @@ describe Enumerable do
   describe '.my_any?' do
     context 'on at least one element the argument is valid'
     it 'will returns a true value if any of the object in the enumerable satisfies the given condition, else it returns false.' do
-      expect([1,5,8].my_any? {|v| v = 5 }).to eql([1,5,8].any? {|v| v = 5 })
+      expect([1,5,8].my_any? {|v| v = 5 }).to eql([1,5,8].any?(5))
     end
 
     context 'the argument is invalid on all the elements, should NOT return equal'
