@@ -63,7 +63,21 @@ describe Enumerable do
     context 'the argument is invalid on all the elements, should NOT return equal'
     it 'will returns a true value if any of the object in the enumerable satisfies the given condition, else it returns false.' do
       t = %w[ant bear cat dog penguin]
-      expect(t.my_any? { |word| word.length >= 4 }).not_to equal(t.any? { |word| word.length >= 8 })
+      expect(t.my_any? { |word| word.length >= 4 }).not_to eql(t.any? { |word| word.length >= 8 })
+    end
+  end
+
+  describe '.my_none?' do
+    context 'the argument is invalid on all the elements, should return equal'
+    it 'will return a value true if none of the objects in the enumerable satisfies the given condition, else it returns false.' do
+      t = %w[ant bear cat dog penguin]
+      expect(t.my_none? { |word| word.length == 5 }).to eql(t.none? { |word| word.length == 5 })
+    end
+
+    context 'the argument is invalid on all the elements but one, should NOT return equal'
+    it 'will return a value true if none of the objects in the enumerable satisfies the given condition, else it returns false.' do
+      t = %w[ant bear cat dog penguin]
+      expect(t.my_none? { |word| word.length == 5 }).not_to eql(t.none? { |word| word.length == 4 })
     end
   end
 end
