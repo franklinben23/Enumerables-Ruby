@@ -16,7 +16,7 @@ require_relative 'enumerables'
 # puts 'my_each' + '----------------------------------'
 # puts [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11].my_each { |v| puts "this is sequence #{v * 2}" }.to_s
 
-puts 'my_each_with_index for hash' + '----------------------------------'
+puts 'my_each_with_index for hash----------------------------------'
 
 { fish: 'shark', bird: 'rooster' }.each_with_index { |v, i| puts "this is key-pair value #{v} and it's index is #{i}" }
 

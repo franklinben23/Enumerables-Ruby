@@ -4,6 +4,7 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
+
     index = 0
     h_array = to_a
 
@@ -23,6 +24,7 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
+
     h_array = to_a
     0.upto(length - 1) do |v|
       yield(h_array[v], v)
@@ -32,6 +34,7 @@ module Enumerable
 
   def my_select
     return to_enum(:my_select) unless block_given?
+
     h_array = to_a
     new_arr = []
     var = 0
@@ -113,6 +116,7 @@ module Enumerable
 
   def my_map
     return to_enum(:my_map) unless block_given?
+
     h_array = to_a
     map_arr = []
 
@@ -124,6 +128,7 @@ module Enumerable
 
   def my_inject(num = 0, &block)
     return 'no block given (LocalJumpError)' unless block_given? || num != 0
+
     sum = 0
     h_range = to_a
     h_range.my_each do |v|
