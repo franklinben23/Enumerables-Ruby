@@ -123,4 +123,23 @@ describe Enumerable do
       expect((1..10).my_map { |val| val > 5 }).to eql((1..10).map { |val| val > 5 })
     end
   end
+
+  describe 'my_inject' do
+    context 'an argument of a symbol'
+    it 'will return the sum of all of the elements' do
+      c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+      expect(c.my_inject(:+)).to eql(c.inject(:+))
+    end
+
+    context 'an argument and a block is pass'
+    it 'will return the multiplication of all the elements' do
+      c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+      expect(c.my_inject(2) { |val| val * 2 }).to eql(c.inject(2) { |val| val * 2 })
+    end
+
+    context 'a block is pass'
+    it 'will return the sum of all of the elements' do
+      expect((1..10).my_inject { |val, num| val * num }).to eql((1..10).inject { |val, num| val * num })
+    end
+  end
 end

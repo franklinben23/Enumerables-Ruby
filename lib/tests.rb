@@ -16,9 +16,9 @@ require_relative 'enumerables'
 # puts 'my_each' + '----------------------------------'
 # puts [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11].my_each { |v| puts "this is sequence #{v * 2}" }.to_s
 
-puts 'my_each_with_index for hash----------------------------------'
+# puts 'my_each_with_index for hash----------------------------------'
 
-{ fish: 'shark', bird: 'rooster' }.each_with_index { |v, i| puts "this is key-pair value #{v} and it's index is #{i}" }
+# { fish: 'shark', bird: 'rooster' }.each_with_index { |v, i| puts "this is key-pair value #{v} and it's index is #{i}"}
 
 # puts 'my_select' + '--------------------------------'
 # c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
@@ -57,20 +57,13 @@ puts 'my_each_with_index for hash----------------------------------'
 # e = (1..10)
 # f = (1..10)
 
-# puts 'my_inject' + '--------------------------------'
-# puts "inject a : #{c.your_inject}\n\n"
-# puts "inject b : #{c.your_inject(1)}\n\n"
-# puts "inject b : #{c.your_inject(11)}\n\n"
-# puts "inject c : #{d.your_inject { |sum, number| sum + number }}\n\n"
-# puts "inject c2 : #{d.your_inject(2) { |sum, number| sum + number }}\n\n"
-# puts "inject d : #{d.your_inject(2) { |sum, number| sum * number }}\n\n"
-# puts "inject e : #{e.your_inject}\n\n"
-# puts "inject f : #{e.your_inject { |sum, number| sum * number }}\n\n"
-# puts "inject g : #{d.your_inject}\n\n"
-# puts "inject g : #{d.your_inject(11)}\n\n"
-
-# puts 'Numerical array'
-# p(c.your_inject { |value| value * 2})
-
-# puts 'Range'
-# p((1..10).your_inject{ |num, n| num + n})
+# puts 'my_inject--------------------------------'
+# puts "inject a : #{c.my_inject}\n\n"
+# puts "inject b : #{c.my_inject(1)}\n\n"
+# puts "inject b : #{c.my_inject(11)}\n\n"
+# puts "inject c : #{d.my_inject { |sum, number| sum + number }}\n\n"
+# puts "inject c2 : #{d.my_inject(2) { |sum, number| sum + number }}\n\n"
+# puts "inject d : #{d.my_inject(2) { |sum, number| sum * number }}\n\n"
+# puts "inject e : #{e.my_inject}\n\n"
+# puts "inject f : #{e.my_inject { |sum, number| sum * number }}\n\n"
+# puts "inject g : #{d.my_inject(11)}\n\n"

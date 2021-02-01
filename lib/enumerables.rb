@@ -167,20 +167,6 @@ module Enumerable
 
     sum
   end
-
-  def your_inject(*arg)
-    raise LocalJumpError unless block_given? || !arg.empty?
-
-    arg = arg.pop unless block_given?
-    my_array = arg + to_a
-    memo = my_array.shift
-    if block_given?
-      my_array.my_each { |item| memo = yield(memo, item) }
-    else
-      my_array.my_each { |item| memo = memo.send(arg, item) }
-    end
-    memo
-  end
 end
 
 # rubocop:enable Metrics/ModuleLength
