@@ -104,4 +104,23 @@ describe Enumerable do
       expect(c.my_count { |val| val > 50 }).to eql(c.count { |val| val > 50 })
     end
   end
+
+  describe 'my_map' do
+    context 'when a block is pass'
+    it 'will returns a new array with the results of the block' do
+      c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+      expect(c.my_map { |num| num * 10 }).to eql(c.map { |num| num * 10 })
+    end
+
+    context 'when a block is not pass'
+    it 'will return the enumerator, expect NOT to be the same' do
+      c = [21, 506, 61, 142, 81, 11, 133, 4, 41, 61, 11]
+      expect(c.my_map).not_to eql(c.map)
+    end
+
+    context 'when a block is pass, and the enumerator is a range'
+    it 'will return a new array with the results of the block' do
+      expect((1..10).my_map { |val| val > 5 }).to eql((1..10).map { |val| val > 5 })
+    end
+  end
 end
