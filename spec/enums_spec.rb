@@ -43,14 +43,27 @@ describe Enumerable do
   end
 
   describe '.my_all?' do
-    context 'the argument is valid'
+    context 'in all elements the argument is valid'
     it 'will return true if the block never returns false or nil.' do
       expect([5,5,5].my_all?(5)).to eql([5,5,5].all?(5))
     end
 
-    context 'the argument is invalid on the built-in, should NOT return equal'
+    context 'the argument is invalid on at least one element, should NOT return equal'
     it 'will return true if the block never returns false or nil.' do
       expect([5,5,5].my_all?(5)).not_to eql([5,5,[5]].all?(5))
+    end
+  end
+
+  describe '.my_any?' do
+    context 'on at least one element the argument is valid'
+    it 'will returns a true value if any of the object in the enumerable satisfies the given condition, else it returns false.' do
+      expect([1,5,8].my_any? {|v| v = 5 }).to eql([1,5,8].any? {|v| v = 5 })
+    end
+
+    context 'the argument is invalid on all the elements, should NOT return equal'
+    it 'will returns a true value if any of the object in the enumerable satisfies the given condition, else it returns false.' do
+      t = %w[ant bear cat dog penguin]
+      expect(t.my_any? { |word| word.length >= 4 }).not_to equal(t.any? { |word| word.length >= 8 })
     end
   end
 end
